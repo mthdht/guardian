@@ -8,7 +8,9 @@
 
     <div class="field flex gap-4 items-center" v-else>
         <label>{{ props.label }}</label>
-        <input :type="props.type" :name="props.name" :placeholder="props.placeholder" v-model="model">
+        <div class="">
+            <input :type="props.type" :name="props.name" :placeholder="props.placeholder" v-model="model">
+        </div>
     </div>
 </template>
 

@@ -91,7 +91,7 @@ const build = {
   }
 }
 
-const dataForm = ref({})
+const dataForm = ref({data: {}, errors: {}})
 
 </script>
 
