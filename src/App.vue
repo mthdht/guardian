@@ -1,30 +1,87 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="p-8">
+    <FormBuilder></FormBuilder>
+
+    <Form :build="build"></Form>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
+<script setup>
+
+import Form from './components/Form.vue'
+
+const build = {
+  fields: [
+    {
+      name: "username",
+      label: "Username",
+      type: "text",
+      placeholder: "Enter your username",
+      defaultValue: "",
+      validation: {
+        required: true,
+        minLength: 3,
+        maxLength: 20,
+        pattern: "email",
+      }
+    },
+    {
+      "name": "email",
+      "label": "Email Address",
+      "type": "email",
+      "placeholder": "example@email.com",
+      "defaultValue": "",
+      "validation": {
+        "required": true,
+        "pattern": "^\\S+@\\S+\\.\\S+$"
+      }
+    },
+    {
+      "name": "age",
+      "label": "Age",
+      "type": "number",
+      "placeholder": "Enter your age",
+      "defaultValue": 18,
+      "validation": {
+        "required": false,
+        "min": 0,
+        "max": 120
+      }
+    },
+    {
+      "name": "gender",
+      "label": "Gender",
+      "type": "select",
+      "options": [
+        { "label": "Male", "value": "male" },
+        { "label": "Female", "value": "female" },
+        { "label": "Other", "value": "other" }
+      ],
+      "defaultValue": null,
+      "validation": {
+        "required": true
+      }
+    },
+    {
+      "name": "newsletter",
+      "label": "Subscribe to newsletter",
+      "type": "checkbox",
+      "defaultValue": false
+    },
+    
+    
+  ],
+  "layout": "vertical",
+  "submitButton": {
+    "label": "Submit",
+    "style": "primary"
+  }
+}
+
+</script>
+
+
+
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
