@@ -1,13 +1,14 @@
 <template>
   <div class="p-8">
-    <FormBuilder></FormBuilder>
 
-    <Form :build="build"></Form>
+    <Form :build="build" v-model="dataForm"></Form>
+
+    {{ dataForm }}
   </div>
 </template>
 
 <script setup>
-
+import { ref } from 'vue'
 import Form from './components/Form.vue'
 
 const build = {
@@ -17,7 +18,7 @@ const build = {
       label: "Username",
       type: "text",
       placeholder: "Enter your username",
-      defaultValue: "",
+      defaultValue: "yeah",
       validation: {
         required: true,
         minLength: 3,
@@ -69,7 +70,7 @@ const build = {
       "defaultValue": false
     },
     {
-      name: "username",
+      name: "color",
       label: "color",
       type: "color",
       placeholder: "Enter your username",
@@ -89,6 +90,8 @@ const build = {
     "style": "primary"
   }
 }
+
+const dataForm = ref({})
 
 </script>
 

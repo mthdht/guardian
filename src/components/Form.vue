@@ -1,7 +1,11 @@
 <template>
     <form class="space-y-4">
         <div class="" v-for="(field, index) in build.fields">
-            <Field v-bind="field"></Field>
+            <Field v-bind="field" v-model="data[field.name]"></Field>
+            <p>
+
+                {{ data[field.name] }}
+            </p>
         </div>
     </form>
 </template>
@@ -16,4 +20,11 @@ const props = defineProps({
         default: () => {},
     }
 })
+
+
+const data = defineModel()
+
+props.build.fields.forEach(field => {
+    data.value[field.name] = field.defaultValue
+});
 </script>
