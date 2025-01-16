@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form class="space-y-4">
         <div class="" v-for="(field, index) in build.fields">
             <Field v-bind="field"></Field>
         </div>

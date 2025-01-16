@@ -68,7 +68,19 @@ const build = {
       "type": "checkbox",
       "defaultValue": false
     },
-    
+    {
+      name: "username",
+      label: "color",
+      type: "color",
+      placeholder: "Enter your username",
+      defaultValue: "",
+      validation: {
+        required: true,
+        minLength: 3,
+        maxLength: 20,
+        pattern: "email",
+      }
+    },
     
   ],
   "layout": "vertical",
