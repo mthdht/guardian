@@ -1,16 +1,15 @@
-
-export function validate(dataForm, fields) {
+export function validate(data, fields) {
+    console.log(data, fields)
+    const errors = {}
     fields.forEach(field => {
-        validateField(field, dataForm.value.data[field.name])
-    })
-} 
+        
+        const value = data[field.name];
+        const rules = field.validation || {};
 
-const validateField = (field, data) => {
-    Object.entries(field.validation || []).forEach(rule => {
-        validateRule(field.name, rule, data)
+        if (rules.required && !value) {
+            errors[field.name] = `${field.label || field.name} is required`;
+            console.log(errors)
+            return errors; // Skip further checks if the field is required and empty
+          }
     })
-}
-
-const validateRule = (fieldName, rule, data) => {
-    console.log(fieldName, rule, data)
 }

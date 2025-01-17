@@ -9,7 +9,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
 import Field from './Field.vue'
 import { validate } from '../utils/validation.js'
 
@@ -23,13 +22,17 @@ const props = defineProps({
 
 
 const dataForm = defineModel()
-const errors = ref({})
 
-const submit = () => {
-    dataForm.value.errors = validate(dataForm, props.build.fields)
-}
 props.build.fields.forEach(field => {
     dataForm.value.data[field.name] = field.defaultValue || ''
+    dataForm.value.errors[field.name] = ''
 });
+console.log(dataForm.value)
+
+const submit = () => {
+    console.log(dataForm.value)
+    dataForm.value.errors = validate(dataForm.value.data, props.build.fields)
+    console.log(dataForm.value.errors)
+}
 
 </script>

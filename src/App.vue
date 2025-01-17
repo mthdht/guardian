@@ -36,7 +36,7 @@ const build = {
         "required": true,
         "pattern": "^\\S+@\\S+\\.\\S+$"
       }
-    },
+    },/*
     {
       "name": "age",
       "label": "Age",
@@ -81,7 +81,7 @@ const build = {
         maxLength: 20,
         pattern: "email",
       }
-    },
+    },*/
     
   ],
   "layout": "vertical",
