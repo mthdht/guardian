@@ -1,7 +1,7 @@
 <template>
   <div class="p-8">
 
-    <Form :build="build" v-model="dataForm"></Form>
+    <Form :build="build" v-model="dataForm" @submit-form="handleForm" no-validation></Form>
 
     {{ dataForm }}
   </div>
@@ -92,6 +92,10 @@ const build = {
 }
 
 const dataForm = ref({data: {}, errors: {}})
+
+const handleForm = () => {
+  console.log(dataForm.value)
+}
 
 </script>
 

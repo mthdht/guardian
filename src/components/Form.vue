@@ -17,22 +17,25 @@ const props = defineProps({
         type: Object,
         required: true,
         default: () => {},
+    },
+    noValidation: {
+        type:Boolean,
+        default: false
     }
 })
 
-
+const emit = defineEmits(['submitForm'])
 const model = defineModel({default: {data: {}, errors: {}}})
 
 props.build.fields.forEach(field => {
     model.value.data[field.name] = field.defaultValue || ''
-    model.value.errors[field.name] = ''
-    console.log(model.value)
 })
 
 const submit = () => {
-    console.log(validate(model.value.data, props.build.fields))
-    model.value.errors = validate(model.value.data, props.build.fields)
-    console.log(model.value)
+    if (!props.noValidation) {
+        model.value.errors = validate(model.value.data, props.build.fields)
+    }
+    emit('submitForm')
 }
 
 </script>
