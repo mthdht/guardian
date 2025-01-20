@@ -1,3 +1,13 @@
+const predefinedPatterns = {
+    alpha: /^[a-zA-Z]+$/,
+    "alpha-dash": /^[a-zA-Z0-9-_]+$/,
+    "alpha-num": /^[a-zA-Z0-9]+$/,
+    email: /^\S+@\S+\.\S+$/,
+    numeric: /^[0-9]+$/,
+    url: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+};
+
+
 export function validate(data, fields) {
     const errors = {}
     fields.forEach(field => {
@@ -30,6 +40,13 @@ export function validate(data, fields) {
             const customError = rules.custom(value);
             if (customError) {
                 errors[field.name]['custom'] = customError;
+            }
+        }
+
+        if (rules.pattern) {
+            const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
+            if (!regex.test(value)) {
+                errors[field.name]['pattern-'+rules.pattern] = `${field.label || field.name} is invalid.`;
             }
         }
 

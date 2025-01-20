@@ -16,9 +16,9 @@ const build = {
     {
       name: "username",
       label: "Username",
-      type: "number",
+      type: "text",
       placeholder: "Enter your username",
-      defaultValue: 3,
+      defaultValue: '',
       validation: {
         required: true,
         min: 3,
