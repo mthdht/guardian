@@ -25,6 +25,14 @@ export function validate(data, fields) {
             errors[field.name]['max'] = `${field.label || field.name} must be at most ${rules.max}.`;
         }
 
+        // Custom validation function
+        if (rules.custom && typeof rules.custom === "function") {
+            const customError = rules.custom(value);
+            if (customError) {
+                errors[field.name]['custom'] = customError;
+            }
+        }
+
     })
     return errors
 }

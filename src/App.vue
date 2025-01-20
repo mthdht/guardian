@@ -24,6 +24,9 @@ const build = {
         min: 3,
         max: 20,
         pattern: "email",
+        custom: (value) => {
+          return 'custom works!'
+        }
       }
     },/*
     {
