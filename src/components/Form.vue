@@ -35,7 +35,7 @@ const submit = () => {
     if (!props.noValidation) {
         model.value.errors = validate(model.value.data, props.build.fields)
     }
-    emit('submitForm')
+    emit('submitForm', {data: model.value.data, errors: model.value.errors})
 }
 
 </script>
