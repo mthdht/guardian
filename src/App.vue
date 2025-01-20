@@ -1,7 +1,7 @@
 <template>
   <div class="p-8">
 
-    <Form :build="build" v-model="dataForm" @submit-form="handleForm" no-validation></Form>
+    <Form :build="build" v-model="dataForm" @submit-form="handleForm"></Form>
 
     {{ dataForm }}
   </div>

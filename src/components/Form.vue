@@ -1,7 +1,7 @@
 <template>
     <form class="space-y-4" @submit.prevent="submit">
         <div class="" v-for="(field, index) in build.fields">
-            <Field v-bind="field" v-model="model.data[field.name]"></Field>
+            <Field v-bind="{...field, errors: model.errors[field.name]}" v-model="model.data[field.name]"></Field>
         </div>
 
         <input type="submit" value="Submit">
