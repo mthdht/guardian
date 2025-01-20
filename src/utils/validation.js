@@ -46,7 +46,7 @@ export function validate(data, fields) {
         if (rules.pattern) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+rules.pattern] = `${field.label || field.name} is invalid.`;
+                errors[field.name]['pattern-'+rules.pattern] = `${field.label || field.name} must follow the ${rules.pattern} format.`;
             }
         }
 

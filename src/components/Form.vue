@@ -4,7 +4,9 @@
             <Field v-bind="{...field, errors: model.errors[field.name]}" v-model="model.data[field.name]"></Field>
         </div>
 
-        <input type="submit" value="Submit">
+        <slot v-if="$slots.default"></slot>
+
+        <input v-else type="submit" :value="props.build.submitButton.label || 'Submit'">
     </form>
 </template>
 

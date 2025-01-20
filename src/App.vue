@@ -1,7 +1,9 @@
 <template>
   <div class="p-8">
 
-    <Form :build="build" v-model="dataForm" @submit-form="handleForm"></Form>
+    <Form :build="build" v-model="dataForm" @submit-form="handleForm">
+      <button>Ok</button>
+    </Form>
 
     {{ dataForm }}
   </div>
