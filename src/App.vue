@@ -1,7 +1,7 @@
 <template>
   <div class="p-8">
 
-    <Form :build="build" @submit-form="handleForm"></Form>
+    <Form :build="build" v-model="dataForm" @submit-form="handleForm"></Form>
 
     {{ dataForm }}
   </div>
@@ -16,16 +16,16 @@ const build = {
     {
       name: "username",
       label: "Username",
-      type: "text",
+      type: "number",
       placeholder: "Enter your username",
-      defaultValue: "yeah",
+      defaultValue: 3,
       validation: {
         required: true,
-        minLength: 3,
-        maxLength: 20,
+        min: 3,
+        max: 20,
         pattern: "email",
       }
-    },
+    },/*
     {
       "name": "email",
       "label": "Email Address",
@@ -36,7 +36,7 @@ const build = {
         "required": true,
         "pattern": "^\\S+@\\S+\\.\\S+$"
       }
-    },/*
+    },
     {
       "name": "age",
       "label": "Age",
@@ -91,6 +91,7 @@ const build = {
   }
 }
 
+const dataForm = ref({data: {}, errors: {}})
 
 const handleForm = ({data, errors}) => {
   console.log(data, errors)

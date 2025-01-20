@@ -27,7 +27,7 @@ const props = defineProps({
     name: String,
     options: Array,
     validation: Object,
-    defaultValue: String,
+    defaultValue: [String,Number],
     errors: Object
 })
 
