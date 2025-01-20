@@ -1,7 +1,7 @@
 <template>
     <form class="space-y-4" @submit.prevent="submit">
         <div class="" v-for="(field, index) in build.fields">
-            <Field v-bind="field" v-model="dataForm.data[field.name]"></Field>
+            <Field v-bind="field" v-model="model.data[field.name]"></Field>
         </div>
 
         <input type="submit" value="Submit">
@@ -21,18 +21,18 @@ const props = defineProps({
 })
 
 
-const dataForm = defineModel()
+const model = defineModel({default: {data: {}, errors: {}}})
 
 props.build.fields.forEach(field => {
-    dataForm.value.data[field.name] = field.defaultValue || ''
-    dataForm.value.errors[field.name] = ''
-});
-console.log(dataForm.value)
+    model.value.data[field.name] = field.defaultValue || ''
+    model.value.errors[field.name] = ''
+    console.log(model.value)
+})
 
 const submit = () => {
-    console.log(dataForm.value)
-    dataForm.value.errors = validate(dataForm.value.data, props.build.fields)
-    console.log(dataForm.value.errors)
+    console.log(validate(model.value.data, props.build.fields))
+    model.value.errors = validate(model.value.data, props.build.fields)
+    console.log(model.value)
 }
 
 </script>
