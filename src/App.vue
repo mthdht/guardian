@@ -89,7 +89,12 @@ const build = {
     },*/
     
   ],
-  
+  messages: {
+    required: 'test required build',
+    pattern: {
+      url: 'test url build'
+    }
+  },
   "layout": "vertical",
   "submitButton": {
     "label": "Submit",

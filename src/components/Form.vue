@@ -14,6 +14,7 @@
 import { inject } from 'vue'
 import Field from './Field.vue'
 import { validate } from '../utils/validation.js'
+import { merge } from 'lodash-es'
 
 const props = defineProps({
     build: {
@@ -35,8 +36,10 @@ props.build.fields.forEach(field => {
 })
 
 const submit = () => {
-    if (!props.noValidation) {  
-        model.value.errors = validate(model.value.data, props.build.fields, props.build.messages || options.messages || {})
+    if (!props.noValidation) { 
+
+        const messages = merge({}, options.messages, props.build.messages)
+        model.value.errors = validate(model.value.data, props.build.fields, messages)
     }
     emit('submitForm', {data: model.value.data, errors: model.value.errors})
 }
