@@ -17,7 +17,6 @@ const predefinedMessages = {
 }
 
 export function validate(data, fields, messages) {
-    console.log(messages)
     const errors = {}
     fields.forEach(field => {
         const value = data[field.name];
@@ -55,7 +54,7 @@ export function validate(data, fields, messages) {
         if (rules.pattern) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+rules.pattern] =  messages.pattern || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
+                errors[field.name]['pattern-'+rules.pattern] =  messages.pattern[rules.pattern] || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
             }
         }
 
