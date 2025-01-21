@@ -29,6 +29,9 @@ const build = {
         custom: (value) => {
           return 'custom works!'
         }
+      },
+      errorsDisplay: {
+        position: 'tooltip'
       }
     },/*
     {
@@ -94,6 +97,9 @@ const build = {
     pattern: {
       email: 'test email build'
     }
+  },
+  errorsDisplay: {
+    position: 'below'
   },
   "layout": "vertical",
   "submitButton": {

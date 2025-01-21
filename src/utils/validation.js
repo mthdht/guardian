@@ -22,8 +22,6 @@ const predefinedMessages = {
 }
 
 export function validate(data, fields, messages) {
-    console.log(messages)
-
     const errors = {}
     fields.forEach(field => {
         const value = data[field.name];

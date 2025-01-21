@@ -10,5 +10,8 @@ createApp(App).use(guardian, {
             url: 'test url options',
             email: 'test email options',
         }
+    },
+    errorsDisplay: {
+        position: 'side',
     }
 }).mount('#app')
