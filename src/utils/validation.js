@@ -7,8 +7,21 @@ const predefinedPatterns = {
     url: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
 };
 
+const predefinedMessages = {
+    required: (label) => `${label} is required. ok`,
+    minLength: (label, value) => `${label} must be at least ${value} characters. ok`,
+    maxLength: (label, value) => `${label} must be at most ${value} characters.`,
+    min: (label, value) => `${label} must be at least ${value}.`,
+    max: (label, value) => `${label} must be at most ${value}.`,
+    pattern: (label, pattern) => `${label} must follow the ${pattern} format. ok`,
+}
 
-export function validate(data, fields) {
+const getErrorMessage = (label = '', rule = '', value = '') => {
+    return predefinedMessages[rule](label, value);
+}
+
+
+export function validate(data, fields, messages) {
     const errors = {}
     fields.forEach(field => {
         const value = data[field.name];
@@ -16,23 +29,23 @@ export function validate(data, fields) {
         errors[field.name] = {}
 
         if (rules.required && !value) {
-            errors[field.name]['required'] = `${field.label || field.name} is required`;
+            errors[field.name]['required'] = getErrorMessage(field.label || field.name, 'required')
         }
 
         // MinLength and MaxLength (for strings)
         if (rules.minLength && typeof value === "string" && value.length < rules.minLength) {
-            errors[field.name]['minLength'] = `${field.label || field.name} must be at least ${rules.minLength} characters long.`;
+            errors[field.name]['minLength'] = getErrorMessage(field.label || field.name, 'minLength', rules.minLength);
         }
         if (rules.maxLength && typeof value === "string" && value.length > rules.maxLength) {
-            errors[field.name]['maxLength'] = `${field.label || field.name} must be at most ${rules.maxLength} characters long.`;
+            errors[field.name]['maxLength'] = getErrorMessage(field.label || field.name, 'maxLength', rules.maxLength);
         }
 
         // Min and Max (for numbers)
         if (rules.min !== undefined && typeof value === "number" && value < rules.min) {
-            errors[field.name]['min'] = `${field.label || field.name} must be at least ${rules.min}.`;
+            errors[field.name]['min'] = getErrorMessage(field.label || field.name, 'min', rules.min);
         }
         if (rules.max !== undefined && typeof value === "number" && value > rules.max) {
-            errors[field.name]['max'] = `${field.label || field.name} must be at most ${rules.max}.`;
+            errors[field.name]['max'] = getErrorMessage(field.label || field.name, 'max', rules.max);
         }
 
         // Custom validation function
@@ -46,7 +59,7 @@ export function validate(data, fields) {
         if (rules.pattern) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+rules.pattern] = `${field.label || field.name} must follow the ${rules.pattern} format.`;
+                errors[field.name]['pattern-'+rules.pattern] = getErrorMessage(field.label || field.name, 'pattern', rules.pattern);
             }
         }
 

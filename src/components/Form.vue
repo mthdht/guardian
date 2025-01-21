@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+import { inject } from 'vue'
 import Field from './Field.vue'
 import { validate } from '../utils/validation.js'
 
@@ -25,7 +26,7 @@ const props = defineProps({
         default: false
     }
 })
-
+const options = inject('options')
 const emit = defineEmits(['submitForm'])
 const model = defineModel({default: {data: {}, errors: {}}})
 
@@ -35,7 +36,7 @@ props.build.fields.forEach(field => {
 
 const submit = () => {
     if (!props.noValidation) {
-        model.value.errors = validate(model.value.data, props.build.fields)
+        model.value.errors = validate(model.value.data, props.build.fields, options.messages)
     }
     emit('submitForm', {data: model.value.data, errors: model.value.errors})
 }

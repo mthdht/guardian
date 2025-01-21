@@ -8,6 +8,7 @@ const guardian = {
       const component = components[componentName];
       Vue.component(component.name, component);
     }
+    Vue.provide('options', options)
   },
 };
 

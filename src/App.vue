@@ -23,7 +23,7 @@ const build = {
       defaultValue: '',
       validation: {
         required: true,
-        min: 3,
+        minLength: 3,
         max: 20,
         pattern: "email",
         custom: (value) => {
@@ -89,6 +89,9 @@ const build = {
     },*/
     
   ],
+  messsages: {
+
+  },
   "layout": "vertical",
   "submitButton": {
     "label": "Submit",
