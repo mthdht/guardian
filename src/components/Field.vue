@@ -30,6 +30,4 @@ const props = defineProps({
     defaultValue: [String,Number],
     errors: Object
 })
-
-console.log(props.errors)
 </script>

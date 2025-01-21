@@ -89,9 +89,7 @@ const build = {
     },*/
     
   ],
-  messsages: {
-
-  },
+  
   "layout": "vertical",
   "submitButton": {
     "label": "Submit",

@@ -35,8 +35,8 @@ props.build.fields.forEach(field => {
 })
 
 const submit = () => {
-    if (!props.noValidation) {
-        model.value.errors = validate(model.value.data, props.build.fields, options.messages)
+    if (!props.noValidation) {  
+        model.value.errors = validate(model.value.data, props.build.fields, props.build.messages || options.messages || {})
     }
     emit('submitForm', {data: model.value.data, errors: model.value.errors})
 }

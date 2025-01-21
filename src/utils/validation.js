@@ -16,12 +16,8 @@ const predefinedMessages = {
     pattern: (label, pattern) => `${label} must follow the ${pattern} format. ok`,
 }
 
-const getErrorMessage = (label = '', rule = '', value = '') => {
-    return predefinedMessages[rule](label, value);
-}
-
-
 export function validate(data, fields, messages) {
+    console.log(messages)
     const errors = {}
     fields.forEach(field => {
         const value = data[field.name];
@@ -29,23 +25,23 @@ export function validate(data, fields, messages) {
         errors[field.name] = {}
 
         if (rules.required && !value) {
-            errors[field.name]['required'] = getErrorMessage(field.label || field.name, 'required')
+            errors[field.name]['required'] = messages.required || predefinedMessages['required'](field.label || field.name);
         }
 
         // MinLength and MaxLength (for strings)
         if (rules.minLength && typeof value === "string" && value.length < rules.minLength) {
-            errors[field.name]['minLength'] = getErrorMessage(field.label || field.name, 'minLength', rules.minLength);
+            errors[field.name]['minLength'] =  messages.minLength || predefinedMessages['minLength'](field.label || field.name, rules.minLength);
         }
         if (rules.maxLength && typeof value === "string" && value.length > rules.maxLength) {
-            errors[field.name]['maxLength'] = getErrorMessage(field.label || field.name, 'maxLength', rules.maxLength);
+            errors[field.name]['maxLength'] =  messages.maxLength || predefinedMessages['maxLength'](field.label || field.name, rules.maxLength);
         }
 
         // Min and Max (for numbers)
         if (rules.min !== undefined && typeof value === "number" && value < rules.min) {
-            errors[field.name]['min'] = getErrorMessage(field.label || field.name, 'min', rules.min);
+            errors[field.name]['min'] =  messages.min || predefinedMessages['min'](field.label || field.name, rules.min);
         }
         if (rules.max !== undefined && typeof value === "number" && value > rules.max) {
-            errors[field.name]['max'] = getErrorMessage(field.label || field.name, 'max', rules.max);
+            errors[field.name]['max'] =  messages.max || predefinedMessages['max'](field.label || field.name, rules.max);
         }
 
         // Custom validation function
@@ -59,7 +55,7 @@ export function validate(data, fields, messages) {
         if (rules.pattern) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+rules.pattern] = getErrorMessage(field.label || field.name, 'pattern', rules.pattern);
+                errors[field.name]['pattern-'+rules.pattern] =  messages.pattern || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
             }
         }
 
