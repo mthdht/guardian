@@ -25,7 +25,7 @@ const build = {
         required: true,
         minLength: 3,
         max: 20,
-        pattern: "email",
+        pattern: /^\S+@\S+\.\S+$/,
         custom: (value) => {
           return 'custom works!'
         }
@@ -92,7 +92,7 @@ const build = {
   messages: {
     required: 'test required build',
     pattern: {
-      url: 'test url build'
+      email: 'test email build'
     }
   },
   "layout": "vertical",

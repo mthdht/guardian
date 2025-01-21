@@ -13,7 +13,12 @@ const predefinedMessages = {
     maxLength: (label, value) => `${label} must be at most ${value} characters.`,
     min: (label, value) => `${label} must be at least ${value}.`,
     max: (label, value) => `${label} must be at most ${value}.`,
-    pattern: (label, pattern) => `${label} must follow the ${pattern} format. ok`,
+    pattern: (label, pattern) => {
+        if (pattern instanceof RegExp) {
+            return `${label} does not follow the ${label} format. ok`
+        }
+        return `${label} must follow the ${pattern} format. ok`
+    }
 }
 
 export function validate(data, fields, messages) {
@@ -55,8 +60,9 @@ export function validate(data, fields, messages) {
 
         if (rules.pattern) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
+            const patternName = regex instanceof RegExp ? 'regex' : rules.pattern;
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+rules.pattern] =  messages.pattern?.[rules.pattern] || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
+                errors[field.name]['pattern-'+ patternName] =  messages.pattern?.[rules.pattern] || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
             }
         }
 
