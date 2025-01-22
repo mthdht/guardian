@@ -95,7 +95,8 @@ const build = {
   messages: {
     required: 'test required build',
     pattern: {
-      email: 'test email build'
+      email: 'test email build',
+      regex: 'ok regex build'
     }
   },
   errorsDisplay: {

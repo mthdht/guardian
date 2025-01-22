@@ -9,9 +9,9 @@
     
     <div class="field flex gap-4" v-else>
         <label>{{ props.label }}</label>
-        <div :class="errorPosition" class="relative">
+        <div :class="errorPosition" class="relative group grow">
             <input :type="props.type" :name="props.name" :placeholder="props.placeholder" v-model="model" class="border">
-            <p v-show="props.errors" class="text-sm text-red-600">* {{ Object.values(props.errors || {})[0] }}</p>
+            <p v-show="props.errors" class="text-sm text-red-600" :class="{'absolute left-0 bottom-full mb-2 border px-3 py-2 hidden group-hover:block': options.errorsDisplay.position == 'tooltip'}">* {{ Object.values(props.errors || {})[0] }}</p>
         </div>
     </div>
 </template>

@@ -15,7 +15,7 @@ const predefinedMessages = {
     max: (label, value) => `${label} must be at most ${value}.`,
     pattern: (label, pattern) => {
         if (pattern instanceof RegExp) {
-            return `${label} does not follow the ${label} format. ok`
+            return `${label} does not follow the good format. ok`
         }
         return `${label} must follow the ${pattern} format. ok`
     }
@@ -60,7 +60,8 @@ export function validate(data, fields, messages) {
             const regex = predefinedPatterns[rules.pattern] || new RegExp(rules.pattern);
             const patternName = regex instanceof RegExp ? 'regex' : rules.pattern;
             if (!regex.test(value)) {
-                errors[field.name]['pattern-'+ patternName] =  messages.pattern?.[rules.pattern] || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
+                console.log(messages)
+                errors[field.name]['pattern-'+ patternName] =  messages.pattern?.[patternName] || predefinedMessages['pattern'](field.label || field.name, rules.pattern);
             }
         }
 

@@ -12,6 +12,6 @@ createApp(App).use(guardian, {
         }
     },
     errorsDisplay: {
-        position: 'side',
+        position: 'tooltip',
     }
 }).mount('#app')
